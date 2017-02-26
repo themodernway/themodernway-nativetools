@@ -138,15 +138,15 @@ def getBuildGITHomeURL() {
 }
 
 def getBuildGITCommitHash() {
-    ''//getBuildGITHomeURL() + '/commit/' + Grgit.open(project.file('.')).head().id
+    getBuildGITHomeURL() + '/commit/' + Grgit.open(project.file('.')).head().id
 }
 
 def getBuildGITCommitUser() {
-    ''//Grgit.open(project.file('.')).head().committer.email
+    Grgit.open(project.file('.')).head().committer.email
 }
 
 def getBuildGITCommitMessage() {
-    ''//Grgit.open(project.file('.')).head().shortMessage
+    Grgit.open(project.file('.')).head().shortMessage
 }
 
 repositories {
@@ -183,9 +183,9 @@ uploadArchives {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-            repository(url: "${sonatype_stageingURL}") {
-            //repository(url: "${sonatype_snapshotURL}") {
-                authentication(userName: "${sonatype_user}", password: "${sonatype_password}")
+            //repository(url: "${sonatype_stageingURL}") {
+            repository(url: "${sonatype_snapshotURL}") {
+                authentication(userName: "${sonatype_user_tmw}", password: "${sonatype_password_tmw}")
             }
             pom.project {
                 name 'TheModernWay-NativeTools'
