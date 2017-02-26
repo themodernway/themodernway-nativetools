@@ -81,7 +81,7 @@ public final class UserMediaInstance
     /*-{
 		var doError = function(message) {
 			var e = @com.themodernway.nativetools.client.usermedia.UserMediaException::new(Ljava/lang/String;)(message);
-			mediacb.@com.themodernway.nativetools.client.usermedia.UserMediaCallback::onError(Lcom/ait/tooling/nativetools/client/usermedia/UserMediaException;)(e);
+			mediacb.@com.themodernway.nativetools.client.usermedia.UserMediaCallback::onError(Lcom/themodernway/nativetools/client/usermedia/UserMediaException;)(e);
 		}
 		navigator.getUserMedia = navigator.getUserMedia
                 || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
@@ -92,7 +92,7 @@ public final class UserMediaInstance
 				element.src = $wnd.URL.createObjectURL(stream);
 				element.volume = 0.0;
 				element.play();
-				mediacb.@com.themodernway.nativetools.client.usermedia.UserMediaCallback::onReady(Lcom/google/gwt/dom/client/MediaElement;Lcom/ait/tooling/nativetools/client/usermedia/UserMediaStream;)(element, stream);
+				mediacb.@com.themodernway.nativetools.client.usermedia.UserMediaCallback::onReady(Lcom/google/gwt/dom/client/MediaElement;Lcom/themodernway/nativetools/client/usermedia/UserMediaStream;)(element, stream);
 			};
 			var onError = function(error) {
 				var type = typeof error;
