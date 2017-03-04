@@ -16,6 +16,7 @@
 
 package com.themodernway.nativetools.client;
 
+@FunctionalInterface
 public interface NObjectOnWire
 {
     public NObject onWire();

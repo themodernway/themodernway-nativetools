@@ -18,6 +18,7 @@ package com.themodernway.nativetools.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+@FunctionalInterface
 public interface NJSONReplacer
 {
     public JavaScriptObject replacer();
