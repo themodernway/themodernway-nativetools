@@ -16,7 +16,10 @@
 
 package com.themodernway.nativetools.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsDate;
 
 public class NObjectJSO extends NObjectBaseJSO<NObjectJSO>
 {
@@ -56,6 +59,18 @@ public class NObjectJSO extends NObjectBaseJSO<NObjectJSO>
     public final void put(final String name, final String value)
     {
         put_0(NUtils.doKeyRepair(name), value);
+    }
+    
+    public final void put(final String name, final Date value)
+    {
+        if (null != value)
+        {
+            put_0(NUtils.doKeyRepair(name), JsDate.create(value.getTime()));
+        }
+        else
+        {
+            put_0(NUtils.doKeyRepair(name), (JavaScriptObject) null);
+        }
     }
 
     public final void put(final String name, final NHasJSO<? extends JavaScriptObject> value)
@@ -130,6 +145,17 @@ public class NObjectJSO extends NObjectBaseJSO<NObjectJSO>
         return getAsString_0(NUtils.doKeyRepair(name));
     }
 
+    public final Date getAsDate(final String name)
+    {
+        final JsDate date = getAsDate_0(NUtils.doKeyRepair(name));
+
+        if (null != date)
+        {
+            return new Date((long) date.getTime());
+        }
+        return null;
+    }
+
     public final String getAsString(final String name, final String otherwise)
     {
         final String value = getAsString_0(NUtils.doKeyRepair(name));
@@ -163,6 +189,11 @@ public class NObjectJSO extends NObjectBaseJSO<NObjectJSO>
     }-*/;
 
     private final native boolean getAsBoolean_0(String name)
+    /*-{
+		return this[name];
+    }-*/;
+
+    private final native JsDate getAsDate_0(String name)
     /*-{
 		return this[name];
     }-*/;

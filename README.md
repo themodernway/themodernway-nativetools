@@ -15,14 +15,14 @@ Maven:
 <dependency>
   <groupId>com.themodernway</groupId>
   <artifactId>themodernway-nativetools</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
 </dependency>
 ```
 Gradle:
 
 ```
 dependencies {
-    compile(group:'com.themodernway',name:'themodernway-nativetools',version:'1.0.2-SNAPSHOT')
+    compile(group:'com.themodernway',name:'themodernway-nativetools',version:'1.0.4-SNAPSHOT')
 }
 ```
 Javadoc URL:

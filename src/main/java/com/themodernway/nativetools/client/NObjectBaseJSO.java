@@ -27,7 +27,7 @@ import com.themodernway.common.api.json.JSONType;
 import com.themodernway.nativetools.client.NUtils.JSON;
 import com.themodernway.nativetools.client.NUtils.Native;
 
-public class NObjectBaseJSO<T extends NObjectBaseJSO<T>> extends JavaScriptObject
+public class NObjectBaseJSO<T extends NObjectBaseJSO<T>>extends JavaScriptObject
 {
     public static final <T extends NObjectBaseJSO<T>> T createNObjectBaseJSO()
     {
@@ -116,6 +116,11 @@ public class NObjectBaseJSO<T extends NObjectBaseJSO<T>> extends JavaScriptObjec
     public final boolean isNativeFunction(final String name)
     {
         return Native.isNativeFunction(this, NUtils.doKeyRepair(name));
+    }
+
+    public final boolean isDate(final String name)
+    {
+        return Native.isDate(this, NUtils.doKeyRepair(name));
     }
 
     public final List<String> keys()

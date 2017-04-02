@@ -16,6 +16,11 @@
 
 package com.themodernway.nativetools.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONArray;
 import com.themodernway.common.api.json.JSONStringify;
@@ -23,7 +28,7 @@ import com.themodernway.common.api.json.JSONType;
 import com.themodernway.common.api.types.IMixedListDefinition;
 import com.themodernway.nativetools.client.NUtils.Native;
 
-public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NArray, NObject>, NObjectOnWire
+public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NArray, NObject>, NObjectOnWire, Iterable<Object>
 {
     private final NArrayJSO m_jso;
 
@@ -863,5 +868,88 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
     public final NObject onWire()
     {
         return new NObject("list", this);
+    }
+
+    public final List<Object> toList()
+    {
+        final int size = size();
+
+        if (size < 1)
+        {
+            return Collections.unmodifiableList(Collections.emptyList());
+        }
+        final ArrayList<Object> list = new ArrayList<Object>(size);
+
+        for (int i = 0; i < size; i++)
+        {
+            if (isNull(i))
+            {
+                list.add(null);
+            }
+            else if (isString(i))
+            {
+                list.add(getAsString(i));
+            }
+            else if (isBoolean(i))
+            {
+                list.add(getAsBoolean(i));
+            }
+            else if (isNumber(i))
+            {
+                if (isInteger(i))
+                {
+                    list.add(getAsInteger(i));
+                }
+                else if (isDouble(i))
+                {
+                    list.add(getAsDouble(i));
+                }
+                else
+                {
+                    list.add(getAsNumber(i));
+                }
+            }
+            else if (isObject(i))
+            {
+                list.add(getAsObject(i));
+            }
+            else if (isArray(i))
+            {
+                list.add(getAsArray(i));
+            }
+            else if (isNativeFunction(i))
+            {
+                list.add(getAsNativeFunction(i));
+            }
+            else
+            {
+                final NValue<?> valu = getAsNValue(i);
+
+                if (null != valu)
+                {
+                    list.add(valu);
+                }
+                else
+                {
+                    final JavaScriptObject mjso = getAsJSO(i);
+
+                    if (null != mjso)
+                    {
+                        list.add(mjso);
+                    }
+                    else
+                    {
+                        list.add(null);
+                    }
+                }
+            }
+        }
+        return Collections.unmodifiableList(list);
+    }
+
+    @Override
+    public final Iterator<Object> iterator()
+    {
+        return toList().iterator();
     }
 }

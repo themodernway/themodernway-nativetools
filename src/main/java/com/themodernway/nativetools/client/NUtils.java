@@ -74,7 +74,7 @@ public final class NUtils
         private static final NativeToolsResources make()
         {
             final NativeToolsResources make = GWT.create(NativeToolsResources.class);
-            
+
             Client.get().injectJs(make.sha_512());
 
             Client.get().injectJs(make.enc_b64());
@@ -205,6 +205,13 @@ public final class NUtils
 			return nops.isNativeFunction(jso[name]);
         }-*/;
 
+        public static final native boolean isDate(JavaScriptObject jso, String name)
+        /*-{
+			var nops = @com.themodernway.nativetools.client.NUtils.Native::nops;
+
+			return nops.isDate(jso[name]);
+        }-*/;
+
         public static final native boolean isObject(JavaScriptObject jso, int index)
         /*-{
 			var nops = @com.themodernway.nativetools.client.NUtils.Native::nops;
@@ -254,6 +261,13 @@ public final class NUtils
 			return nops.isNativeFunction(jso[index]);
         }-*/;
 
+        public static final native boolean isDate(JavaScriptObject jso, int index)
+        /*-{
+			var nops = @com.themodernway.nativetools.client.NUtils.Native::nops;
+
+			return nops.isDate(jso[index]);
+        }-*/;
+
         public static final native boolean isObject(JavaScriptObject jso)
         /*-{
 			var nops = @com.themodernway.nativetools.client.NUtils.Native::nops;
@@ -301,6 +315,13 @@ public final class NUtils
 			var nops = @com.themodernway.nativetools.client.NUtils.Native::nops;
 
 			return nops.isNativeFunction(jso);
+        }-*/;
+
+        public static final native boolean isDate(JavaScriptObject jso)
+        /*-{
+			var nops = @com.themodernway.nativetools.client.NUtils.Native::nops;
+
+			return nops.isDate(jso);
         }-*/;
 
         public final static NValue<?> getAsNValue(final NArrayJSO array, final int index)
@@ -548,11 +569,15 @@ public final class NUtils
 					return @com.themodernway.common.api.json.JSONType::UNDEFINED;
 				}
 				case 'object': {
-					if (Object.prototype.toString.apply(value) === '[object Array]') {
+					var string = Object.prototype.toString.apply(value);
+					if (string === '[object Object]') {
+						return @com.themodernway.common.api.json.JSONType::OBJECT;
+					}
+					if (string === '[object Array]') {
 						return @com.themodernway.common.api.json.JSONType::ARRAY;
 					}
-					if (value === Object(value)) {
-						return @com.themodernway.common.api.json.JSONType::OBJECT;
+					if (string === '[object Date]') {
+						return @com.themodernway.common.api.json.JSONType::DATE;
 					}
 					return @com.themodernway.common.api.json.JSONType::UNDEFINED;
 				}
@@ -619,10 +644,20 @@ public final class NUtils
 					return false;
 				}
 				if ((typeof value) === 'object') {
-					if (Object.prototype.toString.apply(value) === '[object Array]') {
-						return false;
+					if (Object.prototype.toString.apply(value) === '[object Object]') {
+						return true;
 					}
-					return (value === Object(value));
+				}
+				return false;
+			};
+			this.isDate = function(value) {
+				if (null == value) {
+					return false;
+				}
+				if ((typeof value) === 'object') {
+					if (Object.prototype.toString.apply(value) === '[object Date]') {
+						return true;
+					}
 				}
 				return false;
 			};
