@@ -150,7 +150,7 @@ public abstract class NFastPrimitiveArrayBase<A extends NFastPrimitiveArrayBase<
     {
         return m_jso.join(separator);
     }
-    
+
     @Override
     public final NObject onWire()
     {

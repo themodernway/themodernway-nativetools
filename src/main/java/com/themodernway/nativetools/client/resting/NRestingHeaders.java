@@ -53,7 +53,7 @@ public class NRestingHeaders extends LinkedHashMap<String, String> implements IR
     {
         Objects.requireNonNull(hmap);
 
-        for (String s : hmap.keySet())
+        for (final String s : hmap.keySet())
         {
             final String k = StringOps.toTrimOrNull(Operations.clean(s));
 
@@ -73,7 +73,7 @@ public class NRestingHeaders extends LinkedHashMap<String, String> implements IR
     {
         Objects.requireNonNull(hmap);
 
-        for (String s : hmap.keys())
+        for (final String s : hmap.keys())
         {
             final String k = StringOps.toTrimOrNull(Operations.clean(s));
 
@@ -93,7 +93,7 @@ public class NRestingHeaders extends LinkedHashMap<String, String> implements IR
     {
         Objects.requireNonNull(hmap);
 
-        for (String s : hmap.keys())
+        for (final String s : hmap.keys())
         {
             final String k = StringOps.toTrimOrNull(Operations.clean(s));
 
@@ -113,7 +113,7 @@ public class NRestingHeaders extends LinkedHashMap<String, String> implements IR
     {
         Objects.requireNonNull(hmap);
 
-        for (Header head : hmap)
+        for (final Header head : hmap)
         {
             final String k = StringOps.toTrimOrNull(Operations.clean(head.getName()));
 
@@ -240,7 +240,7 @@ public class NRestingHeaders extends LinkedHashMap<String, String> implements IR
 
         make.put(X_CLIENT_UUID_HEADER, Client.get().getClientUUID());
 
-        for (String name : hmap.getStorageHeaderNames())
+        for (final String name : hmap.getStorageHeaderNames())
         {
             final String head = StringOps.toTrimOrNull(Operations.clean(name));
 

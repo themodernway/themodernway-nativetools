@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 import com.themodernway.nativetools.client.NArray;
 
-public final class StringTreeList extends AbstractJSONListDataModel<StringTree>implements Iterable<StringTree>
+public final class StringTreeList extends AbstractJSONListDataModel<StringTree> implements Iterable<StringTree>
 {
     public StringTreeList()
     {

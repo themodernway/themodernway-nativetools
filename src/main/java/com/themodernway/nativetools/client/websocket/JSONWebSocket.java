@@ -56,25 +56,25 @@ public class JSONWebSocket implements IWebSocket<NObjectOnWire>
         m_wssocket = new WebSocket(url, protocols, new WebSocketCallback()
         {
             @Override
-            public void onOpen(WebSocket ws)
+            public void onOpen(final WebSocket ws)
             {
                 m_callback.onOpen(self);
             }
 
             @Override
-            public void onClose(WebSocket ws)
+            public void onClose(final WebSocket ws)
             {
                 m_callback.onClose(self);
             }
 
             @Override
-            public void onError(WebSocket ws, final Throwable error)
+            public void onError(final WebSocket ws, final Throwable error)
             {
                 m_callback.onError(self, error);
             }
 
             @Override
-            public void onMessage(WebSocket ws, final String message)
+            public void onMessage(final WebSocket ws, final String message)
             {
                 try
                 {
@@ -107,7 +107,7 @@ public class JSONWebSocket implements IWebSocket<NObjectOnWire>
                         }
                     }
                 }
-                catch (Exception e)
+                catch (final Exception e)
                 {
                     m_callback.onError(self, e);
                 }

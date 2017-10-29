@@ -25,7 +25,7 @@ import com.themodernway.nativetools.client.NUtils;
 
 /**
  * Simple, super-fast minimal native Map that by default uses a String as a key, but does not fully implement the Map interface
- * 
+ *
  * For our purposes, in benchmarking, this is 50-60% faster than HashMap
  */
 public final class NFastStringMap<V>

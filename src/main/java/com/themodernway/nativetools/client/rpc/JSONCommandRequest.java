@@ -57,7 +57,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
 
     private final String         m_postURL;
 
-    private boolean              m_usexsrf;
+    private final boolean        m_usexsrf;
 
     public JSONCommandRequest(final String url)
     {
@@ -126,7 +126,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
 
         final NArray list = new NArray();
 
-        for (T model : request)
+        for (final T model : request)
         {
             list.push(model.getModel());
         }
@@ -304,7 +304,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
 
                         return;
                     }
-                    catch (Exception e)
+                    catch (final Exception e)
                     {
                         doFailure(command, callback, counter, reqtime, e);
                     }
@@ -317,7 +317,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
                 }
             });
         }
-        catch (RequestException e)
+        catch (final RequestException e)
         {
             doFailure(command, callback, counter, reqtime, e);
         }
@@ -334,7 +334,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
         return DefaultXSRFTokenQueueDictionary.get();
     }
 
-    protected void doFailure(final String command, final AsyncCallback<NObject> callback, final long counter, long reqtime, final Throwable e)
+    protected void doFailure(final String command, final AsyncCallback<NObject> callback, final long counter, final long reqtime, final Throwable e)
     {
         logFailure(command, counter, reqtime, e);
 
@@ -430,7 +430,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
         {
             builder.setHeader(X_XSRF_TOKEN_HEADER, JSONType.UNDEFINED.getValue());
         }
-        for (String name : getBuilderCallHeaderNames())
+        for (final String name : getBuilderCallHeaderNames())
         {
             final String head = StringOps.toTrimOrNull(name);
 
@@ -443,7 +443,7 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
         }
     }
 
-    protected void onPiggyBack(RequestBuilder builder, String command, long counter, NObject piggyback)
+    protected void onPiggyBack(final RequestBuilder builder, final String command, final long counter, final NObject piggyback)
     {
     }
 
@@ -471,11 +471,11 @@ public class JSONCommandRequest extends Activatable implements IJSONCommandReque
         }
     }
 
-    protected void logRequest(String command, long counter, long reqtime, NObject request)
+    protected void logRequest(final String command, final long counter, final long reqtime, final NObject request)
     {
     }
 
-    protected void logResult(String command, long counter, long reqtime, NObject result)
+    protected void logResult(final String command, final long counter, final long reqtime, final NObject result)
     {
     }
 

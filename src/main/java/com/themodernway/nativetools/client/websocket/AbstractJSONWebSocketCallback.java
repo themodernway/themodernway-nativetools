@@ -23,17 +23,17 @@ import com.themodernway.nativetools.client.util.Client;
 public abstract class AbstractJSONWebSocketCallback implements JSONWebSocketCallback
 {
     @Override
-    public void onOpen(JSONWebSocket ws)
+    public void onOpen(final JSONWebSocket ws)
     {
     }
 
     @Override
-    public void onClose(JSONWebSocket ws)
+    public void onClose(final JSONWebSocket ws)
     {
     }
 
     @Override
-    public void onError(JSONWebSocket ws, final Throwable error)
+    public void onError(final JSONWebSocket ws, final Throwable error)
     {
         Client.get().error("JSONWebSocket", error);
     }

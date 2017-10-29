@@ -72,7 +72,7 @@ public class NFastStringArrayJSO extends NFastPrimitiveArrayBaseJSO<NFastStringA
 
     public final void push(final Iterable<String> list)
     {
-        for (String s : list)
+        for (final String s : list)
         {
             push(s);
         }

@@ -28,7 +28,7 @@ import com.themodernway.nativetools.client.NObject;
 import com.themodernway.nativetools.client.NObjectJSO;
 import com.themodernway.nativetools.client.NObjectOnWire;
 
-public abstract class NFastPrimitiveDictionaryBase <T extends NFastPrimitiveDictionarytBaseJSO<T>> implements NHasJSO<T>, NJSONStringify, NObjectOnWire
+public abstract class NFastPrimitiveDictionaryBase<T extends NFastPrimitiveDictionarytBaseJSO<T>> implements NHasJSO<T>, NJSONStringify, NObjectOnWire
 {
     private final T m_jso;
 

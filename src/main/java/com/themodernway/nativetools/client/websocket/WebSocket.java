@@ -78,7 +78,7 @@ public class WebSocket implements IWebSocket<String>
         {
             send_0(message);
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
             m_callback.onError(this, e);
         }

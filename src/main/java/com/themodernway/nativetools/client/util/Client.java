@@ -31,7 +31,7 @@ import com.themodernway.nativetools.client.storage.LocalStorage;
 
 public final class Client implements ILogging, IHTTPConstants
 {
-    private static final Client INSTANCE = new Client();
+    private static final Client INSTANCE  = new Client();
 
     private ILogging            m_logging = ComboLogging.get();
 
@@ -52,14 +52,8 @@ public final class Client implements ILogging, IHTTPConstants
 
     public final Client setDefaultUncaughtExceptionHandler()
     {
-        GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler()
-        {
-            @Override
-            public void onUncaughtException(final Throwable e)
-            {
-                error("Uncaught Exception:", e);
-            }
-        });
+        GWT.setUncaughtExceptionHandler(e -> error("Uncaught Exception:", e));
+
         return this;
     }
 
@@ -105,11 +99,11 @@ public final class Client implements ILogging, IHTTPConstants
      * There is no other way to do "user browser identification" without getting REALLY, REALLY,
      * REALLY hacky!!! ( zombie cookies, Canvas Finger printing, etc. ), which are all nefarious
      * and now well recieved, for good reason.
-     * 
+     *
      * Extra checks to rule out LocalStorage cache poisoning ( OK Laugh, I have seen it happen )
-     * 
+     *
      * DSJ
-     * 
+     *
      */
     public final String getClientUUID()
     {
@@ -183,7 +177,7 @@ public final class Client implements ILogging, IHTTPConstants
         {
             final UmbrellaException u = ((UmbrellaException) e);
 
-            for (Throwable t : u.getCauses())
+            for (final Throwable t : u.getCauses())
             {
                 error(message, t);
             }
@@ -193,7 +187,7 @@ public final class Client implements ILogging, IHTTPConstants
 
         if (isLoggingStackElements())
         {
-            for (StackTraceElement s : e.getStackTrace())
+            for (final StackTraceElement s : e.getStackTrace())
             {
                 m_logging.error(s.toString());
             }
@@ -219,7 +213,7 @@ public final class Client implements ILogging, IHTTPConstants
         {
             final UmbrellaException u = ((UmbrellaException) e);
 
-            for (Throwable t : u.getCauses())
+            for (final Throwable t : u.getCauses())
             {
                 severe(message, t);
             }
@@ -229,7 +223,7 @@ public final class Client implements ILogging, IHTTPConstants
 
         if (isLoggingStackElements())
         {
-            for (StackTraceElement s : e.getStackTrace())
+            for (final StackTraceElement s : e.getStackTrace())
             {
                 m_logging.severe(s.toString());
             }

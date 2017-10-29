@@ -196,13 +196,13 @@ public final class Console implements ILogging
     }
 
     @Override
-    public void info(String message)
+    public void info(final String message)
     {
         log_0("" + message);
     }
 
     @Override
-    public void severe(String message)
+    public void severe(final String message)
     {
         error_0("SEVERE: " + message);
     }
@@ -214,25 +214,25 @@ public final class Console implements ILogging
     }
 
     @Override
-    public void error(String message, Throwable e)
+    public void error(final String message, final Throwable e)
     {
         error_0("ERROR: " + message + " " + e.getMessage());
     }
 
     @Override
-    public void fine(String message)
+    public void fine(final String message)
     {
         debug_0("" + message);
     }
 
     @Override
-    public void warn(String message)
+    public void warn(final String message)
     {
         warn_0("" + message);
     }
 
     @Override
-    public void severe(String message, Throwable e)
+    public void severe(final String message, final Throwable e)
     {
         error_0("SEVERE: " + message + " " + e.getMessage());
     }

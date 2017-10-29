@@ -59,19 +59,14 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
     @Override
     public final void values(final Consumer<Collection<T>> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
-                {
-                    callback.accept(m_storage.values());
-                }
-                else
-                {
-                    getEmpty(callback);
-                }
+                callback.accept(m_storage.values());
+            }
+            else
+            {
+                getEmpty(callback);
             }
         });
     }
@@ -79,26 +74,14 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
     @Override
     public void create(final T model, final Consumer<T> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
-                {
-                    createModelInServerStorage(m_storage, model, new Consumer<T>()
-                    {
-                        @Override
-                        public void accept(final T result)
-                        {
-                            callback.accept(result);
-                        }
-                    });
-                }
-                else
-                {
-                    callback.accept(null);
-                }
+                createModelInServerStorage(m_storage, model, result -> callback.accept(result));
+            }
+            else
+            {
+                callback.accept(null);
             }
         });
     }
@@ -106,19 +89,14 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
     @Override
     public void findByID(final String id, final Consumer<T> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
-                {
-                    callback.accept(m_storage.get(id));
-                }
-                else
-                {
-                    callback.accept(null);
-                }
+                callback.accept(m_storage.get(id));
+            }
+            else
+            {
+                callback.accept(null);
             }
         });
     }
@@ -126,28 +104,23 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
     @Override
     public void findByID(final ModelIDList list, final Consumer<Collection<T>> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
-                {
-                    final int size = list.size();
+                final int size = list.size();
 
-                    if (size > 0)
-                    {
-                        callback.accept(m_storage.get(list));
-                    }
-                    else
-                    {
-                        getEmpty(callback);
-                    }
+                if (size > 0)
+                {
+                    callback.accept(m_storage.get(list));
                 }
                 else
                 {
-                    callback.accept(null);
+                    getEmpty(callback);
                 }
+            }
+            else
+            {
+                callback.accept(null);
             }
         });
     }
@@ -170,33 +143,28 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
 
                 m_waiting.add(callback);
 
-                queryModelsInServerStorage(makeClientStorage(), new Consumer<IDataModelStorage<T>>()
-                {
-                    @Override
-                    public void accept(final IDataModelStorage<T> result)
+                queryModelsInServerStorage(makeClientStorage(), result -> {
+                    if (null == result)
                     {
-                        if (null == result)
+                        for (final Consumer<Boolean> entry1 : m_waiting)
                         {
-                            for (Consumer<Boolean> entry : m_waiting)
-                            {
-                                entry.accept(false);
-                            }
-                            m_waiting.clear();
-
-                            m_waiting = null;
+                            entry1.accept(false);
                         }
-                        else
+                        m_waiting.clear();
+
+                        m_waiting = null;
+                    }
+                    else
+                    {
+                        m_storage = result;
+
+                        for (final Consumer<Boolean> entry2 : m_waiting)
                         {
-                            m_storage = result;
-
-                            for (Consumer<Boolean> entry : m_waiting)
-                            {
-                                entry.accept(true);
-                            }
-                            m_waiting.clear();
-
-                            m_waiting = null;
+                            entry2.accept(true);
                         }
+                        m_waiting.clear();
+
+                        m_waiting = null;
                     }
                 });
             }
@@ -206,19 +174,14 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
     @Override
     public void updateByID(final String id, final T model, final Consumer<Boolean> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
-                {
-                    updateModelInServerStorage(m_storage, model, callback);
-                }
-                else
-                {
-                    callback.accept(false);
-                }
+                updateModelInServerStorage(m_storage, model, callback);
+            }
+            else
+            {
+                callback.accept(false);
             }
         });
     }
@@ -242,19 +205,14 @@ public abstract class AbstractModelController<T extends AbstractJSONDataModel> i
     @Override
     public void deleteByID(final ModelIDList list, final Consumer<Boolean> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
-                {
-                    deleteModelInServerStorage(m_storage, list, callback);
-                }
-                else
-                {
-                    callback.accept(false);
-                }
+                deleteModelInServerStorage(m_storage, list, callback);
+            }
+            else
+            {
+                callback.accept(false);
             }
         });
     }

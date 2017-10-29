@@ -11,7 +11,7 @@
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
-   limitations under the License.   
+   limitations under the License.
  */
 
 package com.themodernway.nativetools.client.datamodel.controller;
@@ -28,7 +28,7 @@ import com.themodernway.nativetools.client.datamodel.ModelIDList;
 import com.themodernway.nativetools.client.rpc.IJSONNamedCommandRequest;
 import com.themodernway.nativetools.client.rpc.JSONCommandCallback;
 
-public abstract class AbstractDataModelIDController<T extends AbstractDataModelID<T> & Comparable<T>>extends AbstractModelController<T> implements IDataModelIDController<T>
+public abstract class AbstractDataModelIDController<T extends AbstractDataModelID<T> & Comparable<T>> extends AbstractModelController<T> implements IDataModelIDController<T>
 {
     protected AbstractDataModelIDController()
     {
@@ -51,7 +51,7 @@ public abstract class AbstractDataModelIDController<T extends AbstractDataModelI
     {
         final LinkedHashSet<String> iset = new LinkedHashSet<String>(list.size());
 
-        for (T item : list)
+        for (final T item : list)
         {
             final String id = item.getId();
 
@@ -112,7 +112,7 @@ public abstract class AbstractDataModelIDController<T extends AbstractDataModelI
                     }
 
                     @Override
-                    public void onSuccess(NObject result)
+                    public void onSuccess(final NObject result)
                     {
                         callback.accept(true);
                     }
@@ -123,7 +123,7 @@ public abstract class AbstractDataModelIDController<T extends AbstractDataModelI
                 getDeleteModelCommand().call(list, new JSONCommandCallback()
                 {
                     @Override
-                    public void onSuccess(NObject result)
+                    public void onSuccess(final NObject result)
                     {
                     }
                 });
@@ -190,7 +190,7 @@ public abstract class AbstractDataModelIDController<T extends AbstractDataModelI
                 }
 
                 @Override
-                public void onSuccess(NObject result)
+                public void onSuccess(final NObject result)
                 {
                     callback.accept(true);
                 }
@@ -201,7 +201,7 @@ public abstract class AbstractDataModelIDController<T extends AbstractDataModelI
             getUpdateModelCommand().call(model, new JSONCommandCallback()
             {
                 @Override
-                public void onSuccess(NObject result)
+                public void onSuccess(final NObject result)
                 {
                 }
             });
@@ -212,62 +212,57 @@ public abstract class AbstractDataModelIDController<T extends AbstractDataModelI
     @Override
     public void update(final Collection<T> batch, final Consumer<Boolean> callback)
     {
-        prime(new Consumer<Boolean>()
-        {
-            @Override
-            public void accept(final Boolean value)
+        prime(value -> {
+            if (value)
             {
-                if (value)
+                if (batch.isEmpty())
                 {
-                    if (batch.isEmpty())
-                    {
-                        callback.accept(true);
-                    }
-                    else
-                    {
-                        if (isUpdateToStorage())
-                        {
-                            for (T item : batch)
-                            {
-                                setModelByID(item.getId(), item);
-                            }
-                        }
-                        if (isUpdateWaitingOn())
-                        {
-                            getUpdateBatchCommand().call(batch, new JSONCommandCallback()
-                            {
-                                @Override
-                                public void onFailure(final Throwable caught)
-                                {
-                                    super.onFailure(caught);
-
-                                    callback.accept(false);
-                                }
-
-                                @Override
-                                public void onSuccess(NObject result)
-                                {
-                                    callback.accept(true);
-                                }
-                            });
-                        }
-                        else
-                        {
-                            getUpdateBatchCommand().call(batch, new JSONCommandCallback()
-                            {
-                                @Override
-                                public void onSuccess(NObject result)
-                                {
-                                }
-                            });
-                            callback.accept(true);
-                        }
-                    }
+                    callback.accept(true);
                 }
                 else
                 {
-                    callback.accept(false);
+                    if (isUpdateToStorage())
+                    {
+                        for (final T item : batch)
+                        {
+                            setModelByID(item.getId(), item);
+                        }
+                    }
+                    if (isUpdateWaitingOn())
+                    {
+                        getUpdateBatchCommand().call(batch, new JSONCommandCallback()
+                        {
+                            @Override
+                            public void onFailure(final Throwable caught)
+                            {
+                                super.onFailure(caught);
+
+                                callback.accept(false);
+                            }
+
+                            @Override
+                            public void onSuccess(final NObject result)
+                            {
+                                callback.accept(true);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        getUpdateBatchCommand().call(batch, new JSONCommandCallback()
+                        {
+                            @Override
+                            public void onSuccess(final NObject result)
+                            {
+                            }
+                        });
+                        callback.accept(true);
+                    }
                 }
+            }
+            else
+            {
+                callback.accept(false);
             }
         });
     }

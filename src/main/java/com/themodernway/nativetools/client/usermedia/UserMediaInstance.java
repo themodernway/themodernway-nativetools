@@ -84,8 +84,8 @@ public final class UserMediaInstance
 			mediacb.@com.themodernway.nativetools.client.usermedia.UserMediaCallback::onError(Lcom/themodernway/nativetools/client/usermedia/UserMediaException;)(e);
 		}
 		navigator.getUserMedia = navigator.getUserMedia
-                || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
-                || navigator.msGetUserMedia;
+				|| navigator.webkitGetUserMedia || navigator.mozGetUserMedia
+				|| navigator.msGetUserMedia;
 
 		if (navigator.getUserMedia) {
 			var onReady = function(stream) {

@@ -21,7 +21,6 @@ import java.util.Objects;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.storage.client.Storage;
-import com.google.gwt.storage.client.StorageEvent;
 import com.themodernway.nativetools.client.event.HandlerRegistrationManager;
 import com.themodernway.nativetools.client.storage.event.LocalStorageEvent;
 import com.themodernway.nativetools.client.storage.event.LocalStorageHandler;
@@ -56,15 +55,10 @@ public final class LocalStorage extends AbstractStorage
         }
         if (isSupported())
         {
-            final HandlerRegistration proxy = Storage.addStorageEventHandler(new StorageEvent.Handler()
-            {
-                @Override
-                public void onStorageChange(final StorageEvent event)
+            final HandlerRegistration proxy = Storage.addStorageEventHandler(event -> {
+                if (isLocalStorage(event))
                 {
-                    if (isLocalStorage(event))
-                    {
-                        m_events.fireEvent(new LocalStorageEvent(get(), event.getKey(), event.getOldValue(), event.getNewValue()));
-                    }
+                    m_events.fireEvent(new LocalStorageEvent(get(), event.getKey(), event.getOldValue(), event.getNewValue()));
                 }
             });
             return new HandlerRegistrationManager(m_events.addHandler(LocalStorageEvent.TYPE, handler), proxy);

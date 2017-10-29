@@ -66,7 +66,7 @@ public final class ClientStorage implements IClientStorage
     {
         if ((null != properties) && (isSupported()))
         {
-            for (String key : properties.keys())
+            for (final String key : properties.keys())
             {
                 switch (properties.getNativeTypeOf(key))
                 {
@@ -79,7 +79,7 @@ public final class ClientStorage implements IClientStorage
                             putNArray(key, value);
                         }
                     }
-                        break;
+                    break;
                     case OBJECT:
                     {
                         final NObject value = properties.getAsObject(key);
@@ -89,7 +89,7 @@ public final class ClientStorage implements IClientStorage
                             putNObject(key, value);
                         }
                     }
-                        break;
+                    break;
                     case STRING:
                     {
                         final String value = properties.getAsString(key);
@@ -99,17 +99,17 @@ public final class ClientStorage implements IClientStorage
                             putString(key, value);
                         }
                     }
-                        break;
+                    break;
                     case NUMBER:
                     {
                         putString(key, String.valueOf(properties.getAsDouble(key)));
                     }
-                        break;
+                    break;
                     case BOOLEAN:
                     {
                         putString(key, String.valueOf(properties.getAsBoolean(key)));
                     }
-                        break;
+                    break;
                     default:
                         break;
                 }
@@ -124,7 +124,7 @@ public final class ClientStorage implements IClientStorage
     {
         if ((null != map) && (isSupported()))
         {
-            for (String key : map.keySet())
+            for (final String key : map.keySet())
             {
                 final Object val = map.get(key);
 
@@ -143,7 +143,7 @@ public final class ClientStorage implements IClientStorage
     {
         if ((null != storage) && (isSupported()) && (storage.isSupported()) && (storage.getType() != getType()))
         {
-            for (String key : storage.keys())
+            for (final String key : storage.keys())
             {
                 putString(key, storage.getString(key));
             }
@@ -215,7 +215,7 @@ public final class ClientStorage implements IClientStorage
     }
 
     @Override
-    public final void putNArray(String key, NArray value)
+    public final void putNArray(final String key, final NArray value)
     {
         if (null == value)
         {

@@ -18,6 +18,7 @@ package com.themodernway.nativetools.client;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,10 +26,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONArray;
 import com.themodernway.common.api.json.JSONStringify;
 import com.themodernway.common.api.json.JSONType;
+import com.themodernway.common.api.types.IFixedIterable;
 import com.themodernway.common.api.types.IMixedListDefinition;
 import com.themodernway.nativetools.client.NUtils.Native;
 
-public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NArray, NObject>, NObjectOnWire, Iterable<Object>
+public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NArray, NObject>, NObjectOnWire, IFixedIterable<Object>
 {
     private final NArrayJSO m_jso;
 
@@ -36,7 +38,7 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
     {
         final NArrayJSO jso = NArrayJSO.make();
 
-        for (Object arg : args)
+        for (final Object arg : args)
         {
             if (null == arg)
             {
@@ -78,7 +80,7 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
     {
         final NArrayJSO jso = NArrayJSO.make();
 
-        for (Object arg : args)
+        for (final Object arg : args)
         {
             if (null == arg)
             {
@@ -235,9 +237,9 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
 
         if ((null != values) && (values.length > 0))
         {
-            for (int i = 0, l = values.length; i < l; i++)
+            for (final int value2 : values)
             {
-                m_jso.push(values[i]);
+                m_jso.push(value2);
             }
         }
         return this;
@@ -256,9 +258,9 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
 
         if ((null != values) && (values.length > 0))
         {
-            for (int i = 0, l = values.length; i < l; i++)
+            for (final double value2 : values)
             {
-                m_jso.push(values[i]);
+                m_jso.push(value2);
             }
         }
         return this;
@@ -277,9 +279,9 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
 
         if ((null != values) && (values.length > 0))
         {
-            for (int i = 0, l = values.length; i < l; i++)
+            for (final boolean value2 : values)
             {
-                m_jso.push(values[i]);
+                m_jso.push(value2);
             }
         }
         return this;
@@ -298,9 +300,9 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
 
         if ((null != values) && (values.length > 0))
         {
-            for (int i = 0, l = values.length; i < l; i++)
+            for (final String value2 : values)
             {
-                m_jso.push(values[i]);
+                m_jso.push(value2);
             }
         }
         return this;
@@ -320,9 +322,9 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
 
         if ((null != values) && (values.length > 0))
         {
-            for (int i = 0, l = values.length; i < l; i++)
+            for (final NHasJSO<? extends JavaScriptObject> value2 : values)
             {
-                m_jso.push(values[i]);
+                m_jso.push(value2);
             }
         }
         return this;
@@ -559,7 +561,7 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
 
     public final NArray deep() throws Exception
     {
-        NValue<?> value = NUtils.JSON.parse(NUtils.JSON.toJSONString(m_jso));
+        final NValue<?> value = NUtils.JSON.parse(NUtils.JSON.toJSONString(m_jso));
 
         return value.asNArray();
     }
@@ -951,5 +953,26 @@ public final class NArray implements NValue<NArrayJSO>, IMixedListDefinition<NAr
     public final Iterator<Object> iterator()
     {
         return toList().iterator();
+    }
+
+    @Override
+    public boolean isDate(final int index)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Date getAsDate(final int index)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Object get(final int index)
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

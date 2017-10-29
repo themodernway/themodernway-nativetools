@@ -406,7 +406,7 @@ public final class NUtils
                     root = Native.parseJSON(json);
                 }
             }
-            catch (Exception e)
+            catch (final Exception e)
             {
                 Client.get().error("JSON.parse()", e);
             }

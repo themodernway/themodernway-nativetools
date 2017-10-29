@@ -51,7 +51,7 @@ abstract class AbstractStorage implements IClientStorage
 
                 storage.removeItem(test);
             }
-            catch (Exception e)
+            catch (final Exception e)
             {
                 storage = null;
 
@@ -78,7 +78,7 @@ abstract class AbstractStorage implements IClientStorage
     {
         if ((null != properties) && (isSupported()))
         {
-            for (String key : properties.keys())
+            for (final String key : properties.keys())
             {
                 switch (properties.getNativeTypeOf(key))
                 {
@@ -91,7 +91,7 @@ abstract class AbstractStorage implements IClientStorage
                             putNArray(key, value);
                         }
                     }
-                        break;
+                    break;
                     case OBJECT:
                     {
                         final NObject value = properties.getAsObject(key);
@@ -101,7 +101,7 @@ abstract class AbstractStorage implements IClientStorage
                             putNObject(key, value);
                         }
                     }
-                        break;
+                    break;
                     case STRING:
                     {
                         final String value = properties.getAsString(key);
@@ -111,17 +111,17 @@ abstract class AbstractStorage implements IClientStorage
                             putString(key, value);
                         }
                     }
-                        break;
+                    break;
                     case NUMBER:
                     {
                         putString(key, String.valueOf(properties.getAsDouble(key)));
                     }
-                        break;
+                    break;
                     case BOOLEAN:
                     {
                         putString(key, String.valueOf(properties.getAsBoolean(key)));
                     }
-                        break;
+                    break;
                     default:
                         break;
                 }
@@ -136,7 +136,7 @@ abstract class AbstractStorage implements IClientStorage
     {
         if ((null != map) && (isSupported()))
         {
-            for (String key : map.keySet())
+            for (final String key : map.keySet())
             {
                 final Object val = map.get(key);
 
@@ -155,7 +155,7 @@ abstract class AbstractStorage implements IClientStorage
     {
         if ((null != storage) && (isSupported()) && (storage.isSupported()) && (storage.getType() != getType()))
         {
-            for (String key : storage.keys())
+            for (final String key : storage.keys())
             {
                 putString(key, storage.getString(key));
             }
@@ -294,7 +294,7 @@ abstract class AbstractStorage implements IClientStorage
                 }
                 return parsed.asNObject();
             }
-            catch (Exception e)
+            catch (final Exception e)
             {
                 return null;
             }
@@ -318,7 +318,7 @@ abstract class AbstractStorage implements IClientStorage
                 }
                 return parsed.asNArray();
             }
-            catch (Exception e)
+            catch (final Exception e)
             {
                 return null;
             }

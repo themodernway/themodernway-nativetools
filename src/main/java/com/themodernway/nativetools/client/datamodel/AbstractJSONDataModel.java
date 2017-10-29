@@ -97,6 +97,12 @@ public abstract class AbstractJSONDataModel extends AbstractModelRepresentation<
     }
 
     @Override
+    public final boolean isDate(final String name)
+    {
+        return getModel().isDate(name);
+    }
+
+    @Override
     public final Object remove(final String name)
     {
         return getModel().remove(name);

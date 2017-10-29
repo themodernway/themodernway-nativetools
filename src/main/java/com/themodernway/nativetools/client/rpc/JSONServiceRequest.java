@@ -26,7 +26,7 @@ public class JSONServiceRequest extends JSONNamedCommandRequest implements IJSON
 
         if (null != name)
         {
-            int indx = name.lastIndexOf("/");
+            final int indx = name.lastIndexOf("/");
 
             if (indx >= 0)
             {

@@ -88,7 +88,7 @@ public final class NRestingResponse implements IRestingResponse
                             m_json = parsed.asNObject();
                         }
                     }
-                    catch (Exception e)
+                    catch (final Exception e)
                     {
                         Client.get().error("NResponse.json()", e);
                     }

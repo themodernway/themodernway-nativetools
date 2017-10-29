@@ -31,7 +31,7 @@ public final class HandlerRegistrationManager implements HandlerRegistration
     {
         register(handler);
 
-        for (HandlerRegistration h : handlers)
+        for (final HandlerRegistration h : handlers)
         {
             register(h);
         }

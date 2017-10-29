@@ -82,7 +82,7 @@ public final class Performance
         {
             m_jso = jso;
         }
-        
+
         public final String getName()
         {
             return m_jso.getName();
@@ -110,31 +110,31 @@ public final class Performance
         }
 
         @Override
-        public String toJSONString(int indent)
+        public String toJSONString(final int indent)
         {
             return NUtils.JSON.toJSONString(m_jso, indent);
         }
 
         @Override
-        public String toJSONString(String indent)
+        public String toJSONString(final String indent)
         {
             return NUtils.JSON.toJSONString(m_jso, indent);
         }
 
         @Override
-        public String toJSONString(NJSONReplacer replacer)
+        public String toJSONString(final NJSONReplacer replacer)
         {
             return NUtils.JSON.toJSONString(m_jso, replacer);
         }
 
         @Override
-        public String toJSONString(NJSONReplacer replacer, int indent)
+        public String toJSONString(final NJSONReplacer replacer, final int indent)
         {
             return NUtils.JSON.toJSONString(m_jso, replacer, indent);
         }
 
         @Override
-        public String toJSONString(NJSONReplacer replacer, String indent)
+        public String toJSONString(final NJSONReplacer replacer, final String indent)
         {
             return NUtils.JSON.toJSONString(m_jso, replacer, indent);
         }
@@ -199,31 +199,31 @@ public final class Performance
         }
 
         @Override
-        public String toJSONString(int indent)
+        public String toJSONString(final int indent)
         {
             return NUtils.JSON.toJSONString(m_jso, indent);
         }
 
         @Override
-        public String toJSONString(String indent)
+        public String toJSONString(final String indent)
         {
             return NUtils.JSON.toJSONString(m_jso, indent);
         }
 
         @Override
-        public String toJSONString(NJSONReplacer replacer)
+        public String toJSONString(final NJSONReplacer replacer)
         {
             return NUtils.JSON.toJSONString(m_jso, replacer);
         }
 
         @Override
-        public String toJSONString(NJSONReplacer replacer, int indent)
+        public String toJSONString(final NJSONReplacer replacer, final int indent)
         {
             return NUtils.JSON.toJSONString(m_jso, replacer, indent);
         }
 
         @Override
-        public String toJSONString(NJSONReplacer replacer, String indent)
+        public String toJSONString(final NJSONReplacer replacer, final String indent)
         {
             return NUtils.JSON.toJSONString(m_jso, replacer, indent);
         }

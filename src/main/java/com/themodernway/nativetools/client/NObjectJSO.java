@@ -60,7 +60,7 @@ public class NObjectJSO extends NObjectBaseJSO<NObjectJSO>
     {
         put_0(NUtils.doKeyRepair(name), value);
     }
-    
+
     public final void put(final String name, final Date value)
     {
         if (null != value)

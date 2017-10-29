@@ -71,7 +71,7 @@ public final class NFastStringHistogram implements NHasJSO<NFastStringHistogram.
     {
         inc(key);
 
-        for (String k : keys)
+        for (final String k : keys)
         {
             inc(k);
         }
@@ -80,7 +80,7 @@ public final class NFastStringHistogram implements NHasJSO<NFastStringHistogram.
 
     public final NFastStringHistogram inc(final Iterable<String> keys)
     {
-        for (String k : keys)
+        for (final String k : keys)
         {
             inc(k);
         }
@@ -100,7 +100,7 @@ public final class NFastStringHistogram implements NHasJSO<NFastStringHistogram.
     {
         dec(key);
 
-        for (String k : keys)
+        for (final String k : keys)
         {
             dec(k);
         }
@@ -109,7 +109,7 @@ public final class NFastStringHistogram implements NHasJSO<NFastStringHistogram.
 
     public final NFastStringHistogram dec(final Iterable<String> keys)
     {
-        for (String k : keys)
+        for (final String k : keys)
         {
             dec(k);
         }

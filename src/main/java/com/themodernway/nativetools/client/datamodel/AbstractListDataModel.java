@@ -22,7 +22,7 @@ import com.themodernway.nativetools.client.NArray;
 import com.themodernway.nativetools.client.NJSONReplacer;
 import com.themodernway.nativetools.client.NObject;
 
-public abstract class AbstractListDataModel<T>extends AbstractModelRepresentation<NArray> implements IListDataModel<T>
+public abstract class AbstractListDataModel<T> extends AbstractModelRepresentation<NArray> implements IListDataModel<T>
 {
     protected AbstractListDataModel()
     {

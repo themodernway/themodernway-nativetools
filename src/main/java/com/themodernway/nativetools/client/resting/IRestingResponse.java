@@ -22,7 +22,7 @@ import com.themodernway.nativetools.client.NObject;
 public interface IRestingResponse extends IRestingCommon, IHTTPConstants
 {
     public int code();
-    
+
     public long time();
 
     public String body();
@@ -36,6 +36,6 @@ public interface IRestingResponse extends IRestingCommon, IHTTPConstants
     public NMethod method();
 
     public IRestingRequest request();
-    
+
     public String reason();
 }

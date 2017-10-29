@@ -16,9 +16,8 @@
 
 package com.themodernway.nativetools.client.resting;
 
-public interface IRestingResponseCallback
-{
-    public void onResponse(IRestingResponse response);
+import com.themodernway.common.api.types.IAsyncCallback;
 
-    public void onFailure(Throwable caught);
+public interface IRestingResponseCallback extends IAsyncCallback<IRestingResponse>
+{
 }

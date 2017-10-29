@@ -38,14 +38,7 @@ public abstract class AbstractDataModelWithIDListController<T extends AbstractDa
         }
         else
         {
-            findFullIDList(list, new Consumer<ModelIDList>()
-            {
-                @Override
-                public final void accept(final ModelIDList result)
-                {
-                    AbstractDataModelWithIDListController.super.deleteByID(result, callback);
-                }
-            });
+            findFullIDList(list, (Consumer<ModelIDList>) result -> AbstractDataModelWithIDListController.super.deleteByID(result, callback));
         }
     }
 
@@ -64,19 +57,14 @@ public abstract class AbstractDataModelWithIDListController<T extends AbstractDa
         }
         else
         {
-            prime(new Consumer<Boolean>()
-            {
-                @Override
-                public void accept(final Boolean result)
+            prime(result -> {
+                if (result)
                 {
-                    if (result)
-                    {
-                        callback.accept(new ModelIDList(subsetByID(new NFastStringSet(), list).keys()));
-                    }
-                    else
-                    {
-                        callback.accept(new ModelIDList());
-                    }
+                    callback.accept(new ModelIDList(subsetByID(new NFastStringSet(), list).keys()));
+                }
+                else
+                {
+                    callback.accept(new ModelIDList());
                 }
             });
         }
@@ -117,20 +105,6 @@ public abstract class AbstractDataModelWithIDListController<T extends AbstractDa
     @Override
     public void findFullIDCollection(final ModelIDList list, final Consumer<Collection<T>> callback)
     {
-        findFullIDList(list, new Consumer<ModelIDList>()
-        {
-            @Override
-            public final void accept(final ModelIDList result)
-            {
-                findByID(result, new Consumer<Collection<T>>()
-                {
-                    @Override
-                    public final void accept(final Collection<T> result)
-                    {
-                        callback.accept(result);
-                    }
-                });
-            }
-        });
+        findFullIDList(list, (Consumer<ModelIDList>) result -> findByID(result, (Consumer<Collection<T>>) result1 -> callback.accept(result1)));
     }
 }

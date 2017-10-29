@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 import com.themodernway.nativetools.client.NArray;
 
-public class StringList extends AbstractListDataModel<String>implements Iterable<String>
+public class StringList extends AbstractListDataModel<String> implements Iterable<String>
 {
     public StringList()
     {
@@ -48,7 +48,7 @@ public class StringList extends AbstractListDataModel<String>implements Iterable
 
         push(value);
 
-        for (String v : values)
+        for (final String v : values)
         {
             push(v);
         }
@@ -60,7 +60,7 @@ public class StringList extends AbstractListDataModel<String>implements Iterable
 
         if (null != values)
         {
-            for (String s : values)
+            for (final String s : values)
             {
                 push(s);
             }
@@ -215,7 +215,7 @@ public class StringList extends AbstractListDataModel<String>implements Iterable
         }
         return false;
     }
-    
+
     @Override
     public int hashCode()
     {

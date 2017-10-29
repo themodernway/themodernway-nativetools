@@ -26,31 +26,31 @@ public class DeferredEventBus extends EventBus
 {
     private final EventBus m_wrapped;
 
-    public DeferredEventBus(EventBus wrapped)
+    public DeferredEventBus(final EventBus wrapped)
     {
         m_wrapped = wrapped;
     }
 
     @Override
-    public <H> HandlerRegistration addHandler(Type<H> type, H handler)
+    public <H> HandlerRegistration addHandler(final Type<H> type, final H handler)
     {
         return m_wrapped.addHandler(type, handler);
     }
 
     @Override
-    public <H> HandlerRegistration addHandlerToSource(Type<H> type, Object source, H handler)
+    public <H> HandlerRegistration addHandlerToSource(final Type<H> type, final Object source, final H handler)
     {
         return m_wrapped.addHandlerToSource(type, source, handler);
     }
 
     @Override
-    public void fireEvent(Event<?> event)
+    public void fireEvent(final Event<?> event)
     {
         Scheduler.get().scheduleDeferred(() -> m_wrapped.fireEvent(event));
     }
 
     @Override
-    public void fireEventFromSource(Event<?> event, Object source)
+    public void fireEventFromSource(final Event<?> event, final Object source)
     {
         Scheduler.get().scheduleDeferred(() -> m_wrapped.fireEventFromSource(event, source));
     }

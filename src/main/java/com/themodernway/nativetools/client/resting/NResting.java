@@ -29,9 +29,9 @@ import com.themodernway.nativetools.client.NObjectOnWire;
 
 public class NResting extends Activatable implements IResting
 {
-    private long   m_docntr;
+    private long         m_docntr;
 
-    private String m_prefix;
+    private final String m_prefix;
 
     public NResting()
     {
@@ -112,7 +112,7 @@ public class NResting extends Activatable implements IResting
     }
 
     @Override
-    public IRestingRequest patch(String url, final NObjectOnWire body, final NRestingHeaders headers, final IRestingResponseCallback callback)
+    public IRestingRequest patch(final String url, final NObjectOnWire body, final NRestingHeaders headers, final IRestingResponseCallback callback)
     {
         return call(NMethod.PATCH, url, body, headers, callback);
     }
@@ -177,23 +177,23 @@ public class NResting extends Activatable implements IResting
         }
         final NRestingHeaders head = headers.doRESTHeaders();
 
-        for (String k : head.keys())
+        for (final String k : head.keys())
         {
             builder.setHeader(k, head.get(k));
         }
-        int mils = head.getTimeout();
+        final int mils = head.getTimeout();
 
         if (mils > 0)
         {
             builder.setTimeoutMillis(mils);
         }
-        String user = head.getUsername();
+        final String user = head.getUsername();
 
         if ((null != user) && (false == user.isEmpty()))
         {
             builder.setUser(user);
 
-            String pass = head.getPassword();
+            final String pass = head.getPassword();
 
             if ((null != pass) && (false == pass.isEmpty()))
             {
@@ -208,7 +208,7 @@ public class NResting extends Activatable implements IResting
                 @Override
                 public void onResponseReceived(final Request request, final Response response)
                 {
-                    callback.onResponse(new NRestingResponse(response.getStatusCode(), response.getText(), new NRestingHeaders(response.getHeaders()).setOptions(head), type, new NRestingRequest(builder.getUrl(), head, type, cntr, time, request), System.currentTimeMillis() - time));
+                    callback.onSuccess(new NRestingResponse(response.getStatusCode(), response.getText(), new NRestingHeaders(response.getHeaders()).setOptions(head), type, new NRestingRequest(builder.getUrl(), head, type, cntr, time, request), System.currentTimeMillis() - time));
                 }
 
                 @Override
@@ -218,7 +218,7 @@ public class NResting extends Activatable implements IResting
                 }
             }));
         }
-        catch (RequestException e)
+        catch (final RequestException e)
         {
             callback.onFailure(new RestingException(e, type, builder.getUrl(), cntr, time));
         }

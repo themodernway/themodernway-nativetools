@@ -22,7 +22,7 @@ import com.themodernway.nativetools.client.NArray;
 import com.themodernway.nativetools.client.NJSONReplacer;
 import com.themodernway.nativetools.client.NObject;
 
-public abstract class AbstractJSONListDataModel <T extends IJSONDataModel<?>> extends AbstractModelRepresentation<NArray>implements IJSONListDataModel<T>
+public abstract class AbstractJSONListDataModel<T extends IJSONDataModel<?>> extends AbstractModelRepresentation<NArray> implements IJSONListDataModel<T>
 {
     protected AbstractJSONListDataModel()
     {

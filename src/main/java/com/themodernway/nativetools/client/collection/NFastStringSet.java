@@ -96,7 +96,7 @@ public final class NFastStringSet implements Iterable<String>, NHasJSO<NFastStri
     {
         add(key);
 
-        for (String k : keys)
+        for (final String k : keys)
         {
             add(k);
         }
@@ -105,7 +105,7 @@ public final class NFastStringSet implements Iterable<String>, NHasJSO<NFastStri
 
     public final NFastStringSet add(final Iterable<String> keys)
     {
-        for (String key : keys)
+        for (final String key : keys)
         {
             add(key);
         }

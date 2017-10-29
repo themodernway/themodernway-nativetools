@@ -44,9 +44,9 @@ public final class NFastArrayList<M> implements Iterable<M>
 
         if ((null != values) && (values.length > 0))
         {
-            for (int i = 0; i < values.length; i++)
+            for (final M value2 : values)
             {
-                add(values[i]);
+                add(value2);
             }
         }
     }
@@ -115,7 +115,7 @@ public final class NFastArrayList<M> implements Iterable<M>
 
     /**
      * Return true if the List contains the passed in value.
-     * 
+     *
      * @param value
      * @return boolean
      */
@@ -228,9 +228,9 @@ public final class NFastArrayList<M> implements Iterable<M>
     {
         add(v);
 
-        for (int i = 0; i < values.length; i++)
+        for (final M value : values)
         {
-            add(values[i]);
+            add(value);
         }
         return this;
     }

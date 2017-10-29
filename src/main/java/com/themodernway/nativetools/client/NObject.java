@@ -16,6 +16,7 @@
 
 package com.themodernway.nativetools.client;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -136,7 +137,7 @@ public final class NObject implements NValue<NObjectJSO>, IMixedStringHashDefini
 
     public final NObject deep() throws Exception
     {
-        NValue<?> value = NUtils.JSON.parse(NUtils.JSON.toJSONString(m_jso));
+        final NValue<?> value = NUtils.JSON.parse(NUtils.JSON.toJSONString(m_jso));
 
         return value.asNObject();
     }
@@ -414,5 +415,19 @@ public final class NObject implements NValue<NObjectJSO>, IMixedStringHashDefini
     public final NObject onWire()
     {
         return this;
+    }
+
+    @Override
+    public boolean isDate(final String name)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Date getAsDate(final String name)
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

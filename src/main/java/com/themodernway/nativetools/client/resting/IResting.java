@@ -22,7 +22,7 @@ import com.themodernway.nativetools.client.NObjectOnWire;
 public interface IResting extends IRestingCommon, IActivatable
 {
     public String getPrefix();
-    
+
     public IRestingRequest get(String url, IRestingResponseCallback callback);
 
     public IRestingRequest get(String url, NRestingHeaders headers, IRestingResponseCallback callback);

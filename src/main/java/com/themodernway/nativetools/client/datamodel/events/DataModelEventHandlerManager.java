@@ -19,7 +19,6 @@ package com.themodernway.nativetools.client.datamodel.events;
 import java.util.Objects;
 
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
@@ -27,7 +26,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 public class DataModelEventHandlerManager
 {
-    private final HandlerManager m_events         = new HandlerManager(this);
+    private final HandlerManager m_events = new HandlerManager(this);
 
     public DataModelEventHandlerManager()
     {
@@ -42,28 +41,14 @@ public class DataModelEventHandlerManager
     {
         Objects.requireNonNull(event);
 
-        Scheduler.get().scheduleDeferred(new ScheduledCommand()
-        {
-            @Override
-            public void execute()
-            {
-                m_events.fireEvent(event);
-            }
-        });
+        Scheduler.get().scheduleDeferred(() -> m_events.fireEvent(event));
     }
 
     public void fireEventFinally(final DataModelEvent<?, ?> event)
     {
         Objects.requireNonNull(event);
 
-        Scheduler.get().scheduleFinally(new ScheduledCommand()
-        {
-            @Override
-            public void execute()
-            {
-                m_events.fireEvent(event);
-            }
-        });
+        Scheduler.get().scheduleFinally(() -> m_events.fireEvent(event));
     }
 
     public <H extends EventHandler> HandlerRegistration addHandler(final DataModelEvent.Type<H> type, final H handler)

@@ -27,7 +27,7 @@ import com.themodernway.common.api.json.JSONType;
 import com.themodernway.nativetools.client.NUtils.JSON;
 import com.themodernway.nativetools.client.NUtils.Native;
 
-public class NObjectBaseJSO<T extends NObjectBaseJSO<T>>extends JavaScriptObject
+public class NObjectBaseJSO<T extends NObjectBaseJSO<T>> extends JavaScriptObject
 {
     public static final <T extends NObjectBaseJSO<T>> T createNObjectBaseJSO()
     {

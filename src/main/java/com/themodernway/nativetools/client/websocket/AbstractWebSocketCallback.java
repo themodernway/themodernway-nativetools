@@ -21,17 +21,17 @@ import com.themodernway.nativetools.client.util.Client;
 public abstract class AbstractWebSocketCallback implements WebSocketCallback
 {
     @Override
-    public void onOpen(WebSocket ws)
+    public void onOpen(final WebSocket ws)
     {
     }
 
     @Override
-    public void onClose(WebSocket ws)
+    public void onClose(final WebSocket ws)
     {
     }
 
     @Override
-    public void onError(WebSocket ws, final Throwable error)
+    public void onError(final WebSocket ws, final Throwable error)
     {
         Client.get().error("WebSocket", error);
     }
